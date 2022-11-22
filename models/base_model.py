@@ -3,6 +3,7 @@
 Module that defines all common attributes/methods for all other
 classes to inherit from
 """
+import uuid
 from datetime import datetime
 
 
@@ -17,7 +18,7 @@ class BaseModel:
         Initialises BaseModel class with default arguments
         """
 
-        self.id = uuid.uuid4()
+        self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
@@ -26,7 +27,7 @@ class BaseModel:
         Prints a friendly representation of BaseModel's instances
         """
 
-        return f"{[type(self).__name__]} {(self.id)} {self.__dict__}"
+        return f"{[type(self).__name__]} ({self.id}) {self.__dict__}"
 
     def save(self):
         """
@@ -44,3 +45,4 @@ class BaseModel:
         dic["__class__"] = type(self).__name__
         dic["created_at"] = self.created_at.isoformat()
         dic["updated_at"] = self.updated_at.isoformat()
+        return dic
