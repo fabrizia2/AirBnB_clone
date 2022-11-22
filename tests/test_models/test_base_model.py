@@ -2,7 +2,8 @@
 """
 Module that test the class BaseModel attributes and methods
 """
-import unittest, datetime
+import unittest
+import datetime
 from models.base_model import BaseModel
 
 
@@ -60,7 +61,7 @@ class TestBaseClass(unittest.TestCase):
         obj7 = BaseModel()
         strv = str(obj7)
         strv1 = f"{[type(obj7).__name__]} ({obj7.id}) {obj7.__dict__}"
-        self.assertEqual(strv,strv1)
+        self.assertEqual(strv, strv1)
 
     def test_save_method(self):
         """
@@ -71,7 +72,7 @@ class TestBaseClass(unittest.TestCase):
         old_updated = obj8.updated_at
         obj8.save()
         new_updated = obj8.updated_at
-        self.assertNotEqual(old_updated,new_updated)
+        self.assertNotEqual(old_updated, new_updated)
 
     def test_to_dict_method_return(self):
         """
@@ -80,7 +81,7 @@ class TestBaseClass(unittest.TestCase):
 
         obj9 = BaseModel()
         dic = obj9.to_dict()
-        self.assertIs(type(dic),dict)
+        self.assertIs(type(dic), dict)
 
     def test_to_dict_method_keys(self):
         """
@@ -93,7 +94,8 @@ class TestBaseClass(unittest.TestCase):
         dic["created_at"] = obj10.created_at.isoformat()
         dic["updated_at"] = obj10.updated_at.isoformat()
         dic1 = obj10.to_dict()
-        self.assertDictEqual(dic,dic1)
+        self.assertDictEqual(dic, dic1)
+
 
 if __name__ == "__main__":
     unittest.main()
