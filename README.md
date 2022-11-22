@@ -1,2 +1,1 @@
-# First Step towasrds AirBnB clone project by building a Command line intepreter
-
+## Contains a Base Class that will be the basis of all other models and classes for the Project
