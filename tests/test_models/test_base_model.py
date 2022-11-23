@@ -7,7 +7,7 @@ import datetime
 from models.base_model import BaseModel
 
 
-class TestBaseClass(unittest.TestCase):
+class TestBaseModelClass(unittest.TestCase):
     """
     Class to define methods testing base class
     """
@@ -19,7 +19,7 @@ class TestBaseClass(unittest.TestCase):
 
         obj1 = BaseModel()
         obj2 = BaseModel()
-        self.assertNotEqual(obj1, obj2)
+        self.assertNotEqual(obj1.id, obj2.id)
 
     def test_id_string(self):
         """
@@ -29,9 +29,9 @@ class TestBaseClass(unittest.TestCase):
         obj3 = BaseModel()
         self.assertIs(type(obj3.id), str)
 
-    def test_id_instance(self):
+    def test_instance(self):
         """
-        Test id attribute is unique, string and instances
+        Test object is instance
         """
 
         obj4 = BaseModel()
