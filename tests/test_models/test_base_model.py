@@ -96,6 +96,19 @@ class TestBaseModelClass(unittest.TestCase):
         dic1 = obj10.to_dict()
         self.assertDictEqual(dic, dic1)
 
+    def test_recreate_instance_from_dict(self):
+        """
+        Test instance recreation from dict
+        """
+
+        obj11 = BaseModel()
+        obj11.name = "my_first_clone"
+        obj11.my_number = 99
+        dict_rep = obj11.to_dict()
+        obj11_copy = BaseModel(**dict_rep)
+        str1 = str(obj11)
+        str2 = str(obj11_copy)
+        self.assertEqual(str1, str2)
 
 if __name__ == "__main__":
     unittest.main()
