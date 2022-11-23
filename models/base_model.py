@@ -5,6 +5,7 @@ classes to inherit from
 """
 import uuid
 from datetime import datetime
+from models.__init__ import storage
 
 
 class BaseModel:
@@ -35,6 +36,8 @@ class BaseModel:
         """
 
         self.updated_at = datetime.now()
+        """calling the save(self) method of storage"""
+        storage.save()
 
     def to_dict(self):
         """
