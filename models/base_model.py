@@ -45,6 +45,7 @@ class BaseModel:
 
         self.updated_at = datetime.now()
         """calling the save(self) method of storage"""
+        storage.new(self)
         storage.save()
 
     def to_dict(self):
