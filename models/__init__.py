@@ -4,8 +4,8 @@
  """
 
 """importing file_storage"""
-from models.engine.file_storage import FileStorage
+import models.engine.file_storage as f
 """creating the variable storage, an instance of FileStorage"""
-storage = FileStorage()
+storage = f.FileStorage()
 """calls reload() method on this variable"""
 storage.reload()

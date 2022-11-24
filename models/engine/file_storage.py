@@ -3,7 +3,7 @@
 Filestorage module
 """
 import json
-
+import models.base_model
 
 class FileStorage:
     """
@@ -25,7 +25,7 @@ class FileStorage:
         """
 
         key = f"{type(obj).__name__}.{obj.id}"
-        type(self).__objects[key] = str(obj)
+        type(self).__objects[key] = obj.to_dict()
 
     def save(self):
         """
@@ -43,6 +43,9 @@ class FileStorage:
 
         try:
             with open(self.__file_path, "r") as read_file:
-                type(self).__objects = json.load(read_file)
+                obj_dict = json.load(read_file)
+                #need to recreate the instances here
+                for key in obj_dict.keys():
+                    type(self).__objects[key] = models.base_model.BaseModel(**obj_dict[key])
         except FileNotFoundError:
             pass
