@@ -110,5 +110,6 @@ class TestBaseModelClass(unittest.TestCase):
         str2 = str(obj11_copy)
         self.assertEqual(str1, str2)
 
+
 if __name__ == "__main__":
     unittest.main()
