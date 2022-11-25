@@ -10,6 +10,7 @@ class FileStorage:
     serializes instances to a JSON file and deserializes JSON file to instances
     """
 
+
     __file_path = 'file.json'
     __objects = {}
 
@@ -32,6 +33,8 @@ class FileStorage:
         serializes __objects to the JSON file
         """
 
+        from models.user import User
+
         obj_dict = self.all()
         serializer_dict = {}
         for key in obj_dict.keys():
@@ -45,6 +48,7 @@ class FileStorage:
         """
 
         from models.base_model import BaseModel
+        from models.user import User
         try:
             with open(self.__file_path, "r") as read_file:
                 obj_dicts = json.load(read_file)
