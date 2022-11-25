@@ -3,9 +3,6 @@
  serializes instances to a JSON file and deserializes JSON file to instances
  """
 
-"""importing file_storage"""
-import models.engine.file_storage as f
-"""creating the variable storage, an instance of FileStorage"""
-storage = f.FileStorage()
-"""calls reload() method on this variable"""
+from models.engine import file_storage
+storage = file_storage.FileStorage()
 storage.reload()
