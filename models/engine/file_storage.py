@@ -28,8 +28,7 @@ class FileStorage:
         """
 
         key = f"{type(obj).__name__}.{obj.id}"
-        my_obj = obj
-        type(self).__objects[key] = my_obj
+        type(self).__objects[key] = obj
 
     def save(self):
         """
@@ -39,7 +38,6 @@ class FileStorage:
         obj_dict = self.all()
         serializer_dict = {}
         for key in obj_dict.keys():
-            print(obj_dict[key])
             serializer_dict[key] = obj_dict[key].to_dict()
         with open(type(self).__file_path, 'w') as write_file:
             json.dump(serializer_dict, write_file)
