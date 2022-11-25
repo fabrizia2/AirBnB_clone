@@ -56,3 +56,11 @@ class FileStorage:
                 type(self).__objects[key] = BaseModel(**obj_dicts[key])
         except FileNotFoundError:
             pass
+
+    def modify_objects(self, new_dict):
+        """
+        Modify the __objects dictionary and save changes
+        to json file
+        """
+        self.__objects = new_dict
+        self.save()
