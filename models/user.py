@@ -30,5 +30,5 @@ class User(BaseModel):
         user_dict["email"] = self.email
         user_dict["password"] = self.password
         user_dict["fisrt_nme"] = self.first_name
-        user_dict["last_name"]= self.last_name
+        user_dict["last_name"] = self.last_name
         return user_dict
