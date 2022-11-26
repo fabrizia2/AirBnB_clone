@@ -62,6 +62,7 @@ class HBNBCommand(cmd.Cmd):
                 class_ = getattr(class_mod, arg)
                 new_instance = class_()
                 new_instance.save()
+                print(new_instance.id)
             else:
                 print(f"** class doesn't exist **")
         else:
@@ -122,16 +123,18 @@ class HBNBCommand(cmd.Cmd):
         """
 
         obj_dict = storage.all()
+        ls = []
         if arg:
             if arg in type(self).__class_list:
                 for key, val in obj_dict.items():
                     if type(val).__name__ == arg:
-                        print(val)
+                        ls.append(str(val))
             else:
                 print(f"** class doesn't exist **")
         else:
             for key, val in obj_dict.items():
-                print(val)
+                ls.append(str(val))
+        print(ls)
 
     def do_update(self, arg):
         """
@@ -163,11 +166,106 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     value = int(args[3])
                 except ValueError:
-                    value = float(args[3])
+                    try:
+                        value = float(args[3])
+                    except ValueError:
+                        value = str(args[3])
             obj = all_dicts[key]
             setattr(obj, args[2], value)
             all_dicts[key] = obj
             storage.modify_objects(all_dicts)
+
+    def default(self, line):
+        """Called on an input line when the command prefix is not recognized.
+           In that case we execute the line as Python code.
+        """
+
+        commands = ["all()", "count()", "show(id)", "destroy(id)",
+                    "update(id, name, value)", "update(id, dict)"]
+        obj_dict = storage.all()
+        try:
+            args = line.split(".")
+            if args[0] in type(self).__class_list:
+                if args[1] in commands and args[1] == "all()":
+                    type(self).all_helper(obj_dict, args)
+                elif args[1] in commands and args[1] == "count()":
+                    ls = []
+                    for key, val in obj_dict.items():
+                        if type(val).__name__ == args[0]:
+                            ls.append(val)
+                elif args[1].startswith("show"):
+                    class_id = args[1].split('"')[1]
+                    full_key = f"{args[0]}" + " " + class_id
+                    self.do_show(full_key)
+                elif args[1].startswith("destroy"):
+                    class_id = args[1].split('"')[1]
+                    full_key = f"{args[0]}" + " " + class_id
+                    self.do_destroy(full_key)
+                elif args[1].startswith("update"):
+                    identifiers = args[1].split('"')
+                    class_id = identifiers[1]
+                    dict_or_no = identifiers[2]
+                    if dict_or_no == ",":
+                        self.update_helper(args, identifiers)
+                    else:
+                        identifiers = args[1].split(" ")
+                        self.update_helper_d(args, class_id, identifiers)
+        except Exception as e:
+            print(e.__class__, ":", e)
+
+    @staticmethod
+    def all_helper(obj_dict, args):
+        """
+        Helper function for <class_name>.all() default function
+        """
+
+        ls = []
+        for key, val in obj_dict.items():
+            if type(val).__name__ == args[0]:
+                ls.append(val)
+                print("[", end="")
+                for i in range(len(ls)):
+                    print(ls[i], end="")
+                    if i < len(ls) - 1:
+                        print(",", end="")
+                print("]")
+
+    def update_helper(self, args, identifiers):
+        """
+        Update helper without dictionary
+        """
+
+        class_id = identifiers[1]
+        name = identifiers[3]
+        value = identifiers[5]
+        print(f"{class_id} {name} {value}")
+        key = f"{args[0]}" + " " + class_id
+        full_arg = key + " " + name + " " + value
+        print(full_arg)
+        self.do_update(full_arg)
+
+    def update_helper_d(self, args, class_id, identifiers):
+        """
+        helper function to help update dictionary
+        """
+
+        names = []
+        for i in range(1, len(identifiers)):
+            if identifiers[i].startswith("{"):
+                if identifiers[i].endswith(":"):
+                    name = identifiers[i].lstrip("{")
+                    name = name.rstrip(":")
+                    names.append(name)
+            elif identifiers[i].endswith("})"):
+                names.append(identifiers[i].rstrip("})"))
+            elif identifiers[i].endswith(":"):
+                names.append(identifiers[i].rstrip(":"))
+            else:
+                names.append(identifiers[i])
+        key = f"{args[0]}" + " " + class_id
+        for i in range(0, len(names), 2):
+            full_arg = key + " " + names[i] + " " + names[i+1]
+            self.do_update(full_arg)
 
 
 if __name__ == '__main__':
