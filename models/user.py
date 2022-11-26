@@ -19,7 +19,7 @@ class User(BaseModel):
 
     def __str__(self):
         super().__str__()
-        return f"{[type(self).__name__]} ({self.id}) {self.__dict__}"
+        return f"[User] ({self.id}) {self.__dict__}"
 
     def save(self):
         super().save()
@@ -29,6 +29,6 @@ class User(BaseModel):
         user_dict["__class__"] = type(self).__name__
         user_dict["email"] = self.email
         user_dict["password"] = self.password
-        user_dict["fisrt_nme"] = self.first_name
+        user_dict["first_name"] = self.first_name
         user_dict["last_name"] = self.last_name
         return user_dict
