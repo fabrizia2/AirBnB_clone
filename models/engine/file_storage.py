@@ -51,6 +51,7 @@ class FileStorage:
             with open(self.__file_path, "r") as read_file:
                 obj_dicts = json.load(read_file)
             for key in obj_dicts.keys():
+                #no error here
                 class_str = obj_dicts[key]["__class__"]
                 names = re.findall('^[a-z]+|[A-Z][^A-Z]*', class_str)
                 if len(names) > 1:
