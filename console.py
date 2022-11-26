@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """The script that contains the entry point of the command interpreter"""
 import cmd
+import importlib
+import re
 from models.base_model import BaseModel
 from models import storage
 
@@ -13,7 +15,8 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
     __file_path = 'file.json'
-    __class_list = ["BaseModel"]
+    __class_list = ["BaseModel", "User", "Place", "State",
+                    "City", "Amenity", "Review"]
 
     def do_quit(self, arg):
         """
@@ -45,8 +48,20 @@ class HBNBCommand(cmd.Cmd):
         """
 
         if arg:
-            if arg in type(self).class_list:
-                new_instance = BaseModel()
+            if arg in type(self).__class_list:
+                names = names = re.findall('^[a-z]+|[A-Z][^A-Z]*', arg)
+                if len(names) > 1:
+                    lower_names = []
+                    for name in names:
+                        lower_names.append(name.lower())
+                    class_name = "_".join(lower_names)
+                else:
+                    class_name = arg.lower()
+                mod_name = "models." + class_name
+                print(mod_name)
+                class_mod = importlib.import_module(mod_name)
+                class_ = getattr(class_mod, arg)
+                new_instance = class_()
                 new_instance.save()
                 print(new_instance.id)
             else:
@@ -110,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
 
         obj_dict = storage.all()
         if arg:
+            print(arg)
             if arg in type(self).__class_list:
                 for key, val in obj_dict.items():
                     if type(val).__name__ == arg:
