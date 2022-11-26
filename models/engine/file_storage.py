@@ -12,7 +12,6 @@ class FileStorage:
     serializes instances to a JSON file and deserializes JSON file to instances
     """
 
-
     __file_path = 'file.json'
     __objects = {}
 
@@ -35,7 +34,6 @@ class FileStorage:
         serializes __objects to the JSON file
         """
 
-
         obj_dict = self.all()
         serializer_dict = {}
         for key in obj_dict.keys():
@@ -57,8 +55,7 @@ class FileStorage:
                 if len(names) > 1:
                     lower_names = []
                     for name in names:
-                        name = name.lower()
-                        lower_names.append(name)
+                        lower_names.append(name.lower())
                     str_join = "_".join(lower_names)
                 else:
                     names[0] = names[0].lower()
