@@ -17,7 +17,7 @@ class City(BaseModel):
 
     def __str__(self):
         super().__str__()
-        return f"{[type(self).__name__]} ({self.id}) {self.__dict__}"
+        return f"[City] ({self.id}) {self.__dict__}"
 
     def save(self):
         super().save()
