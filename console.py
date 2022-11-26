@@ -128,40 +128,34 @@ class HBNBCommand(cmd.Cmd):
 
         all_dicts = storage.all()
         args = arg.split(" ")
-        print(len(args))
-        print(args)
-        if len(args) >= 4:
-            if arg[0] in type(self).__class_list:
-                key = f"{args[0]}.{args[1]}"
-                if key in all_dicts.keys():
-                    obj_dict = all_dicts[key]
-                    obj_dict[args[2]] = args[3]
-                    storage.modify_objects(all_dicts)
-                else:
-                    print(f"** no instance found **")
-            else:
-                print(f"** class doesn't exist **")
-        elif len(args) == 3:
-            if arg[0] not in type(self).__class_list:
-                print(f"** class doesn't exist **")
-            else:
-                print(f"** value missing **")
-        elif len(args) == 2:
-            if arg[0] not in type(self).__class_list:
-                print(f"** class doesn't exist **")
-            else:
-                key = f"{args[0]}.{args[1]}"
-                if key in all_dicts.keys():
-                    print(f"** attribute name missing **")
-                else:
-                    print(f"** no instance found **")
-        elif len(args) == 1 and args[0] != "":
-            if arg[0] not in type(self).__class_list:
-                print(f"** class doesn't exist **")
-            else:
-                print(f"** instance id missing **")
-        else:
+        key = f"{args[0]}.{args[1]}"
+        if len(args) == 1 and args == "":
             print(f"** class name missing **")
+        elif len(args) == 1 and args not in type(self).__class_list:
+            print(f"** class doesn't exist **")
+        elif len(args) == 1 and args in type(self).__class_list:
+            printf(f"** instance id missing **")
+        elif len(args) >= 2 and key not in all_dicts.keys():
+            print(f"** no instance found **")
+        elif len(args) == 2 and key in all_dicts.keys():
+            print(f"** attribute name missing **")
+        elif len(args) == 3 and key in all_dicts.keys():
+            print(f"** value mising **")
+        else:
+            print(args)
+            if args[3].startswith('"'):
+                args[3] = args[3].lstrip('"')
+                args[3] = args[3].rstrip('"')
+                value = args[3]
+            else:
+                try:
+                    value = int(args[3])
+                except ValueError:
+                    value = float(args[3])
+            obj = all_dicts[key]
+            setattr(obj, args[2], value)
+            all_dicts[key] = obj
+            storage.modify_objects(all_dicts)
 
 
 if __name__ == '__main__':
