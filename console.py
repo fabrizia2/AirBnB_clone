@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
 
         if arg:
             if arg in type(self).__class_list:
-                names = names = re.findall('^[a-z]+|[A-Z][^A-Z]*', arg)
+                names = re.findall('^[a-z]+|[A-Z][^A-Z]*', arg)
                 if len(names) > 1:
                     lower_names = []
                     for name in names:
@@ -58,12 +58,10 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     class_name = arg.lower()
                 mod_name = "models." + class_name
-                print(mod_name)
                 class_mod = importlib.import_module(mod_name)
                 class_ = getattr(class_mod, arg)
                 new_instance = class_()
                 new_instance.save()
-                print(new_instance.id)
             else:
                 print(f"** class doesn't exist **")
         else:
@@ -79,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
         if arg:
             args = arg.split(" ")
             if args[0] in type(self).__class_list:
-                if len(args) == 2:
+                if len(args) >= 2:
                     key = f"{args[0]}.{args[1]}"
                     if key in obj_dict.keys():
                         obj = obj_dict[key]
@@ -87,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         print(f"** no instance found **")
                 elif len(args) == 1:
-                    print(f"** instance id missig **")
+                    print(f"** instance id missing **")
             else:
                 print(f"** class doesn't exist **")
         else:
@@ -103,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
         if arg:
             args = arg.split(" ")
             if args[0] in type(self).__class_list:
-                if len(args) == 2:
+                if len(args) >= 2:
                     key = f"{args[0]}.{args[1]}"
                     if key in obj_dict.keys():
                         del obj_dict[key]
@@ -111,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         print(f"** no instance found **")
                 elif len(args) == 1:
-                    print(f"** instance id missig **")
+                    print(f"** instance id missing **")
             else:
                 print(f"** class doesn't exist **")
         else:
@@ -125,7 +123,6 @@ class HBNBCommand(cmd.Cmd):
 
         obj_dict = storage.all()
         if arg:
-            print(arg)
             if arg in type(self).__class_list:
                 for key, val in obj_dict.items():
                     if type(val).__name__ == arg:
@@ -147,9 +144,9 @@ class HBNBCommand(cmd.Cmd):
         key = f"{args[0]}.{args[1]}"
         if len(args) == 1 and args == "":
             print(f"** class name missing **")
-        elif len(args) == 1 and args not in type(self).__class_list:
+        elif len(args) == 1 and args[0] not in type(self).__class_list:
             print(f"** class doesn't exist **")
-        elif len(args) == 1 and args in type(self).__class_list:
+        elif len(args) == 1 and args[0] in type(self).__class_list:
             printf(f"** instance id missing **")
         elif len(args) >= 2 and key not in all_dicts.keys():
             print(f"** no instance found **")
