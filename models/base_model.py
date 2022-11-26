@@ -36,7 +36,7 @@ class BaseModel:
         Prints a friendly representation of BaseModel's instances
         """
 
-        return f"{[type(self).__name__]} ({self.id}) {self.__dict__}"
+        return f"[BaseModel] ({self.id}) {self.__dict__}"
 
     def save(self):
         """
