@@ -43,7 +43,8 @@ class FileStorage:
 
     def reload(self):
         """
-        deserializes the JSON file to __objects
+        deserializes the JSON file to  dict then to __objects dictionary
+        containing objects
         """
 
         try:
