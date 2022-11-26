@@ -5,4 +5,3 @@
 ## Base Class Containing all the attributes and methods to be inherited from
  Contains a base class that forms the basis for all models, attributes and methods to be added in the
  project.
- 
