@@ -158,7 +158,6 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 3 and key in all_dicts.keys():
             print(f"** value mising **")
         else:
-            print(args)
             if args[3].startswith('"'):
                 args[3] = args[3].lstrip('"')
                 args[3] = args[3].rstrip('"')
