@@ -3,6 +3,8 @@
 Filestorage module
 """
 import json
+import importlib
+import re
 
 
 class FileStorage:
@@ -33,7 +35,6 @@ class FileStorage:
         serializes __objects to the JSON file
         """
 
-        from models.user import User
 
         obj_dict = self.all()
         serializer_dict = {}
@@ -47,12 +48,24 @@ class FileStorage:
         deserializes the JSON file to __objects
         """
 
-        from models.base_model import BaseModel
-        from models.user import User
         try:
             with open(self.__file_path, "r") as read_file:
                 obj_dicts = json.load(read_file)
             for key in obj_dicts.keys():
-                type(self).__objects[key] = BaseModel(**obj_dicts[key])
+                class_str = obj_dicts[key]["__class__"]
+                names = re.findall('^[a-z]+|[A-Z][^A-Z]*', class_str)
+                if len(names) > 1:
+                    lower_names = []
+                    for name in names:
+                        name = name.lower()
+                        lower_names.append(name)
+                    str_join = "_".join(lower_names)
+                else:
+                    names[0] = names[0].lower()
+                    str_join = names[0]
+                module_name = "models." + str_join
+                class_mod = importlib.import_module(module_name)
+                class_ = getattr(class_mod, class_str)
+                type(self).__objects[key] = class_(**obj_dicts[key])
         except FileNotFoundError:
             pass
