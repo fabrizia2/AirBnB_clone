@@ -30,4 +30,22 @@
                               +methods: save() and to_json()
 
 ### models/engine
- This directory will contain all storage classes (using the same prototype). For the moment you will have only one: *** file_storage.py ***
+ This directory will contain all storage classes (using the same prototype). For the moment you will have only one: ***file_storage.py***
+
+## Description of the command interpreter
+| Command   | Description |
+| ----------| ------------|
+| quit	 | Quits the console|
+|Ctrl+D	|Quits the console|
+|help or help <command>	|Displays all commands or Displays instructions for a specific command|
+| create <class>	| Creates an object of type , saves it to a JSON file, and prints the objects ID|
+| show <class> <ID>	| Shows string representation of an object|
+| destroy <class> <ID>	| Deletes an objects
+| all or all <class>	| Prints all string representations of all objects or Prints all string representations of all objects of a specific class|
+|update <class> <id> <attribute name> "<attribute value>"	|Updates an object with a certain attribute (new or existing)|
+|<class>.all()	|Same as all <class>|
+|<class>.count()	|Retrieves the number of objects of a certain class|
+|<class>.show(<ID>)	|Same as show <class> <ID>|
+|<class>.destroy(<ID>)	|Same as destroy <class> <ID>|
+|<class>.update(<ID>, <attribute name>, <attribute value>	|Same as update <class> <ID> <attribute name> <attribute value>|
+|<class>.update(<ID>, <dictionary representation>)	|Update objects based on a dictionary representation of attribute names and values|
