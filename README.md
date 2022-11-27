@@ -24,8 +24,8 @@
 ### Console.py
  This file is the entry point of our command interpreter.
 
-##How the Console works
-"`
+## How the Console works
+```
 $ ./console.py
 (hbnb) help
 
@@ -56,7 +56,7 @@ Documented commands (type help <topic>):
 EOF  help  quit
 (hbnb) 
 $
-"`
+```
 
 ### models/base_model.py
  This file is the base class of all our models. 
