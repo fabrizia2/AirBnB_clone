@@ -24,6 +24,40 @@
 ### Console.py
  This file is the entry point of our command interpreter.
 
+##How the Console works
+"`
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+"`
+
 ### models/base_model.py
  This file is the base class of all our models. 
  It contains common elements: -attributes: id, created_at and updated_at
