@@ -18,7 +18,7 @@ class Place(BaseModel):
             self.description = ""
             self.number_rooms = 0
             self.number_bathrooms = 0
-            self.max_guests = 0
+            self.max_guest = 0
             self.price_by_night = 0
             self.latitude = 0.0
             self.longitude = 0.0
@@ -40,7 +40,7 @@ class Place(BaseModel):
         place_dict["description"] = self.description
         place_dict["number_rooms"] = self.number_rooms
         place_dict["number_bathrooms"] = self.number_bathrooms
-        place_dict["max_guests"] = self.max_guests
+        place_dict["max_guest"] = self.max_guest
         place_dict["price_by_night"] = self.price_by_night
         place_dict["latitude"] = self.latitude
         place_dict["longitude"] = self.longitude
