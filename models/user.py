@@ -27,8 +27,8 @@ class User(BaseModel):
     def to_dict(self):
         user_dict = super().to_dict()
         user_dict["__class__"] = type(self).__name__
-        user_dict["email"] = self.email
-        user_dict["password"] = self.password
-        user_dict["first_name"] = self.first_name
-        user_dict["last_name"] = self.last_name
+        user_dict["email"] = type(self).email
+        user_dict["password"] = type(self).password
+        user_dict["first_name"] = type(self).first_name
+        user_dict["last_name"] = type(self).last_name
         return user_dict
