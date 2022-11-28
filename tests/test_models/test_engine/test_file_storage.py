@@ -2,10 +2,18 @@
 """Unit test for the file storage class
 """
 import unittest
-from models.engine import file_storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models import storage
+import models
+import unittest
+from datetime import datetime
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class TestFileStorage(unittest.TestCase):
@@ -23,14 +31,13 @@ class TestFileStorage(unittest.TestCase):
         test if it's an instance of filestorage
         """
         my_storage = FileStorage()
-        self.assertIs(my_storage, FileStorage)
+        self.assertIsInstance(storage, FileStorage)
 
     def test_all(self):
         """
         test method all for the file
         """
-        my_storage1 = FileStorage.all()
-        self.assertTrue(type(my_storage1) == dict)
+        self.assertEqual(type(dict, type(models.storage.all()))
 
     def test_new(self):
         """
