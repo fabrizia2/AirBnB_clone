@@ -9,13 +9,14 @@ class User(BaseModel):
     """
     public attributes
     """
+
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
+
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
-        if not kwargs:
-            self.email = ""
-            self.password = ""
-            self.first_name = ""
-            self.last_name = ""
 
     def __str__(self):
         return f"[User] ({self.id}) {self.__dict__}"
