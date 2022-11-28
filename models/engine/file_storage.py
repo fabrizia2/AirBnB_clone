@@ -67,7 +67,7 @@ class FileStorage:
                     class_mod = importlib.import_module(module_name)
                     class_ = getattr(class_mod, class_str)
                     type(self).__objects[key] = class_(**obj_dicts[key])
-                except:
+                except Exception as E:
                     pass
         except FileNotFoundError:
             pass
