@@ -25,6 +25,6 @@ class City(BaseModel):
     def to_dict(self):
         city_dict = super().to_dict()
         city_dict["__class__"] = type(self).__name__
-        city_dict["state_id"] = type(sel)f.state_id
-        city_dict["name"] = type(sel)f.name
+        city_dict["state_id"] = type(self).state_id
+        city_dict["name"] = type(self).name
         return city_dict

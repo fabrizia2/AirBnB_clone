@@ -26,7 +26,7 @@ class Review(BaseModel):
     def to_dict(self):
         review_dict = super().to_dict()
         review_dict["__class__"] = type(self).__name__
-        review_dict["place_id"] = type(sel)f.place_id
+        review_dict["place_id"] = type(self).place_id
         review_dict["user_id"] = type(self).user_id
         review_dict["text"] = type(self).text
         return review_dict
