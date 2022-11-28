@@ -9,11 +9,11 @@ class City(BaseModel):
     """
     public attributes of the class
     """
+    state_id = ""
+    name = ""
+
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
-        if len(kwargs) == 0:
-            self.state_id = ""
-            self.name = ""
 
     def __str__(self):
         super().__str__()
@@ -25,6 +25,6 @@ class City(BaseModel):
     def to_dict(self):
         city_dict = super().to_dict()
         city_dict["__class__"] = type(self).__name__
-        city_dict["state_id"] = self.state_id
-        city_dict["name"] = self.name
+        city_dict["state_id"] = type(sel)f.state_id
+        city_dict["name"] = type(sel)f.name
         return city_dict
