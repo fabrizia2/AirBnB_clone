@@ -79,8 +79,8 @@ class TestUser(unittest.TestCase):
         """
 
         obj8 = User()
-        strv = str(my_user8)
-        strv1 = f"{[type(obj8).__name__]} ({obj8.id}) {obj8.__dict__}"
+        strv = str(obj8)
+        strv1 = f"[User] ({obj8.id}) {obj8.__dict__}"
         self.assertEqual(strv, strv1)
 
     def test_save_method(self):

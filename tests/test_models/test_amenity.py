@@ -76,7 +76,7 @@ class TestAmenity(unittest.TestCase):
 
         obj7 = Amenity()
         strv = str(obj7)
-        strv1 = f"{[type(obj7).__name__]} ({obj7.id}) {obj7.__dict__}"
+        strv1 = f"[Amenity] ({obj7.id}) {obj7.__dict__}"
         self.assertEqual(strv, strv1)
 
     def test_save_method(self):
@@ -89,15 +89,6 @@ class TestAmenity(unittest.TestCase):
         obj8.save()
         new_updated = obj8.updated_at
         self.assertNotEqual(old_updated, new_updated)
-
-    def test_to_dict_method_return(self):
-        """
-        Test to_dict method that it returns an appropriate dict
-        """
-
-        obj9 = Amenity()
-        dic = obj9.to_dict()
-        self.assertIs(type(dic), dict)
 
     def test_to_dict_method_keys(self):
         """

@@ -77,7 +77,7 @@ class TestCity(unittest.TestCase):
 
         obj7 = City()
         strv = str(obj7)
-        strv1 = f"{[type(obj7).__name__]} ({obj7.id}) {obj7.__dict__}"
+        strv1 = f"[City] ({obj7.id}) {obj7.__dict__}"
         self.assertEqual(strv, strv1)
 
     def test_save_method(self):

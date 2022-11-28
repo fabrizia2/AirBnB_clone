@@ -36,7 +36,7 @@ class TestPlace(unittest.TestCase):
         self.assertIs(type(my_place1.price_by_night), int)
         self.assertIs(type(my_place1.latitude), float)
         self.assertIs(type(my_place1.longitude), float)
-        self.assertIs(type(my_place1.amenity_ids), [str])
+        self.assertIs(type(my_place1.amenity_ids), [""])
 
     def test_id_unique(self):
         """
@@ -86,7 +86,7 @@ class TestPlace(unittest.TestCase):
 
         obj7 = Place()
         strv = str(obj7)
-        strv1 = f"{[type(obj7).__name__]} ({obj7.id}) {obj7.__dict__}"
+        strv1 = f"[Place] ({obj7.id}) {obj7.__dict__}"
         self.assertEqual(strv, strv1)
 
     def test_save_method(self):
