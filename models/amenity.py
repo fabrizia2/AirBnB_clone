@@ -9,10 +9,10 @@ class Amenity(BaseModel):
     """
     public attributes
     """
+
+    name = ""
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
-        if len(kwargs) == 0:
-            self.name = ""
 
     def __str__(self):
         super().__str__()
@@ -24,4 +24,4 @@ class Amenity(BaseModel):
     def to_dict(self):
         amenity_dict = super().to_dict()
         amenity_dict["__class__"] = type(self).__name__
-        amenity_dict["name"] = self.name
+        amenity_dict["name"] = type(self).name

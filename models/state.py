@@ -9,10 +9,13 @@ class State(BaseModel):
     """
     public attributes
     """
+    name = ""
+
     def __init__(self, *args, **kwargs):
+        """
+        initializing function inheriting from BaseModel
+        """
         super().__init__(self, *args, **kwargs)
-        if len(kwargs) == 0:
-            self.name = ""
 
     def __str__(self):
         super().__str__()
@@ -24,5 +27,5 @@ class State(BaseModel):
     def to_dict(self):
         state_dict = super().to_dict()
         state_dict["__class__"] = type(self).__name__
-        state_dict["name"] = self.name
+        state_dict["name"] = type(self).name
         return state_dict
