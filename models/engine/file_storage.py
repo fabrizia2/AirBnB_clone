@@ -52,20 +52,23 @@ class FileStorage:
             with open(self.__file_path, "r") as read_file:
                 obj_dicts = json.load(read_file)
             for key in obj_dicts.keys():
-                class_str = obj_dicts[key]["__class__"]
-                names = re.findall('^[a-z]+|[A-Z][^A-Z]*', class_str)
-                if len(names) > 1:
-                    lower_names = []
-                    for name in names:
-                        lower_names.append(name.lower())
-                    str_join = "_".join(lower_names)
-                else:
-                    names[0] = names[0].lower()
-                    str_join = names[0]
-                module_name = "models." + str_join
-                class_mod = importlib.import_module(module_name)
-                class_ = getattr(class_mod, class_str)
-                type(self).__objects[key] = class_(**obj_dicts[key])
+                try:
+                    class_str = obj_dicts[key]["__class__"]
+                    names = re.findall('^[a-z]+|[A-Z][^A-Z]*', class_str)
+                    if len(names) > 1:
+                        lower_names = []
+                        for name in names:
+                            lower_names.append(name.lower())
+                            str_join = "_".join(lower_names)
+                    else:
+                        names[0] = names[0].lower()
+                        str_join = names[0]
+                    module_name = "models." + str_join
+                    class_mod = importlib.import_module(module_name)
+                    class_ = getattr(class_mod, class_str)
+                    type(self).__objects[key] = class_(**obj_dicts[key])
+                except:
+                    pass
         except FileNotFoundError:
             pass
 

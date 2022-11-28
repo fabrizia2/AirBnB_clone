@@ -11,7 +11,7 @@ class User(BaseModel):
     """
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
-        if len(kwargs) == 0:
+        if not kwargs:
             self.email = ""
             self.password = ""
             self.first_name = ""

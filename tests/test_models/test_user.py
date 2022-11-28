@@ -3,9 +3,7 @@
 Test for the user class
 """
 import unittest
-from models.base_model import BaseModel
 from models.user import User
-from models import user
 import datetime
 
 
@@ -19,7 +17,7 @@ class TestUser(unittest.TestCase):
         """
 
         my_user = User()
-        self.assertIsInstance(my_user, BaseModel)
+        self.assertIsInstance(my_user, User)
 
     def test_is_str(self):
         """
