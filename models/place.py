@@ -25,7 +25,6 @@ class Place(BaseModel):
             self.amenity_ids = []
 
     def __str__(self):
-        super().__str__()
         return f"[Place] ({self.id}) {self.__dict__}"
 
     def save(self):

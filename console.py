@@ -134,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             for key, val in obj_dict.items():
                 ls.append(str(val))
-        print(ls)
+        if ls:
+            print(ls)
 
     def do_update(self, arg):
         """
@@ -143,37 +144,43 @@ class HBNBCommand(cmd.Cmd):
         """
 
         all_dicts = storage.all()
-        args = arg.split(" ")
-        key = f"{args[0]}.{args[1]}"
-        if len(args) == 1 and args == "":
-            print(f"** class name missing **")
-        elif len(args) == 1 and args[0] not in type(self).__class_list:
-            print(f"** class doesn't exist **")
-        elif len(args) == 1 and args[0] in type(self).__class_list:
-            printf(f"** instance id missing **")
-        elif len(args) >= 2 and key not in all_dicts.keys():
-            print(f"** no instance found **")
-        elif len(args) == 2 and key in all_dicts.keys():
-            print(f"** attribute name missing **")
-        elif len(args) == 3 and key in all_dicts.keys():
-            print(f"** value mising **")
-        else:
-            if args[3].startswith('"'):
-                args[3] = args[3].lstrip('"')
-                args[3] = args[3].rstrip('"')
-                value = args[3]
+        if arg:
+            args = arg.split(" ")
+            if len(args) >= 2:
+                key = f"{args[0]}.{args[1]}"
             else:
-                try:
-                    value = int(args[3])
-                except ValueError:
+                key = ""
+            if len(args) == 1 and args == "":
+                print(f"** class name missing **")
+            elif args[0] not in type(self).__class_list:
+                print(f"** class doesn't exist **")
+            elif len(args) == 1 and args[0] in type(self).__class_list:
+                print(f"** instance id missing **")
+            elif len(args) >= 2 and key not in all_dicts.keys():
+                print(f"** no instance found **")
+            elif len(args) == 2 and key in all_dicts.keys():
+                print(f"** attribute name missing **")
+            elif len(args) == 3 and key in all_dicts.keys():
+                print(f"** value missing **")
+            else:
+                if args[3].startswith('"'):
+                    args[3] = args[3].lstrip('"')
+                    args[3] = args[3].rstrip('"')
+                    value = args[3]
+                else:
                     try:
-                        value = float(args[3])
+                        value = int(args[3])
                     except ValueError:
-                        value = str(args[3])
-            obj = all_dicts[key]
-            setattr(obj, args[2], value)
-            all_dicts[key] = obj
-            storage.modify_objects(all_dicts)
+                        try:
+                            value = float(args[3])
+                        except ValueError:
+                            value = str(args[3])
+                obj = all_dicts[key]
+                setattr(obj, args[2], value)
+                all_dicts[key] = obj
+                storage.modify_objects(all_dicts)
+        else:
+            print(f"** class name missing **")
 
     def default(self, line):
         """Called on an input line when the command prefix is not recognized.

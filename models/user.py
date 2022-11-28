@@ -18,7 +18,6 @@ class User(BaseModel):
             self.last_name = ""
 
     def __str__(self):
-        super().__str__()
         return f"[User] ({self.id}) {self.__dict__}"
 
     def save(self):
