@@ -9,12 +9,12 @@ class Review(BaseModel):
     """
     public class attributes
     """
+    place_id = ""
+    user_id = ""
+    text = ""
+
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
-        if len(kwargs) == 0:
-            self.place_id = ""
-            self.user_id = ""
-            self.text = ""
 
     def __str__(self):
         super().__str__()
@@ -26,7 +26,7 @@ class Review(BaseModel):
     def to_dict(self):
         review_dict = super().to_dict()
         review_dict["__class__"] = type(self).__name__
-        review_dict["place_id"] = self.place_id
-        review_dict["user_id"] = self.user_id
-        review_dict["text"] = self.text
+        review_dict["place_id"] = type(sel)f.place_id
+        review_dict["user_id"] = type(self).user_id
+        review_dict["text"] = type(self).text
         return review_dict
